@@ -1,19 +1,22 @@
 name: Sync Branches
-on:
+on: 
   push:
-    branches:
+    branches: 
       - dev
+    
 jobs:
   sync-branch:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-
-      - name: Merge dev -> master
-        uses: devmasx/merge-branch@master
-        with:
-          type: now
-          from_branch: dev
-          target_branch: master
-          message: Merge dev into master
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+    - uses: actions/checkout@v3
+    - name: Set Git config
+      run: |
+          git config --local user.email "sandeep.bikkina@ah.nl"
+          git config --local user.name "Sandeep084b"
+    - name: Merge master back to dev
+      run: |
+          git fetch --unshallow
+          git checkout dev
+          git pull
+          git merge --no-ff master -m "Auto-merge master back to dev"
+          git push
