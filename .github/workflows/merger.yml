@@ -14,8 +14,10 @@ jobs:
       run: |
           git config --local user.email "sandeep.bikkina@ah.nl"
           git config --local user.name "Sandeep084b"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
     - name: Merge master back to dev
       run: |
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           git fetch --unshallow
           git checkout dev
           git pull
