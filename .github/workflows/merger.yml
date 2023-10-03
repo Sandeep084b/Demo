@@ -1,6 +1,6 @@
 name: Sync Branches
 on: 
-  Push:
+  push:
     branches: 
       - dev
     
