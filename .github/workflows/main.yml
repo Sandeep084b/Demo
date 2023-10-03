@@ -1,16 +1,18 @@
-name: Merger
-
-on:
+name: Sync Branches
+on: 
   push:
-    branches:
-      - 'dev'
+    branches: 
+      - dev
+    
 jobs:
-  merge-branch:
+  sync-branch:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-        with:
-          github_token: ${{ github.token }}
-          source_ref: ${{ github.ref }}
-          target_branch: 'master'
-          commit_message_template: '[Automated] Merged {source_ref} into target {target_branch}'
+    - uses: actions/checkout@v3
+    - name: Merge master back to dev
+      run: |
+          git fetch --unshallow
+          git checkout dev
+          git pull
+          git merge --no-ff origin/master -m "Auto-merge master back to dev"
+          git push
