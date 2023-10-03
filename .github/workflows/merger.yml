@@ -9,10 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - name: Set Git config
-      run: |
-          git config --local user.email "sandeep.bikkina@ah.nl"
-          git config --local user.name "Sandeep084b"
     - name: Merge master back to dev
       run: |
           git fetch --unshallow
