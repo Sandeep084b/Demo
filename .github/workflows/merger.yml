@@ -3,7 +3,7 @@ name: Merger
 on:
   push:
     branches:
-      - "refs/head/dev"
+      - dev
 jobs:
   merge-branch:
     runs-on: ubuntu-latest
