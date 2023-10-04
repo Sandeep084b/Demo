@@ -17,8 +17,8 @@ jobs:
     - name: Merge master back to dev
       run: |
           git fetch --unshallow
-          git checkout dev
+          git checkout master
           git pull
-          git merge --no-ff origin/master -m "Auto-merge master back to dev"
+          git merge --no-ff origin/dev -m "Auto-merge dev back to master"
           git push
        
