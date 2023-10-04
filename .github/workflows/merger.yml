@@ -1,4 +1,4 @@
-# Merge dev branch to master
+# Merge dev branch to test
 name: Sync Branches
 on: 
   push:
@@ -14,10 +14,10 @@ jobs:
       run: |
          git config --local user.email "sandeep.bikkina@ah.nl"
          git config --local user.name "Sandeep084b"
-    - name: Merge master back to dev
+    - name: Merge dev back to test
       run: |
           git fetch --unshallow
-          git checkout master
+          git checkout test
           git pull
           git merge --no-ff origin/dev -m "Auto-merge dev back to master"
           git push
