@@ -1,3 +1,4 @@
+# Merge dev branch to master
 name: Sync Branches
 on: 
   push:
