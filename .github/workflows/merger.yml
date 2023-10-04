@@ -1,4 +1,4 @@
-# Merge dev branch to master
+# Merge dev branch to test
 name: Sync Branches
 on: 
   push:
@@ -17,7 +17,7 @@ jobs:
     - name: Merge master back to dev
       run: |
           git fetch --unshallow
-          git checkout master
+          git checkout test
           git pull
-          git merge --no-ff origin/dev -m "Auto-merge dev back to master"
+          git merge --no-ff origin/dev -m "Auto-merge dev back to test"
           git push
