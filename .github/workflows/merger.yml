@@ -25,7 +25,7 @@ jobs:
          git config --local user.name "githusuer"
     - name: Merge dev back to test
       run: |
-          git fetch --unshallow
+          git fetch
           git checkout test
           git pull
           git merge --no-ff origin/dev -m "Auto-merge dev back to master"
