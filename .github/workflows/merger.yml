@@ -10,13 +10,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+    - name: Get changed files
+      id: changed-files
+      uses: tj-actions/changed-files@v39
+
+    - name: List all added files
+      run: |
+        for file in ${{ steps.changed-files.outputs.added_files }}; do
+          echo "$file was added"
+        done
     - name: Set Git config
       run: |
          git config --local user.email "githubactions@noreply.com"
          git config --local user.name "githusuer"
     - name: Merge dev back to test
       run: |
-          git fetch --unshallow
+          git fetch
           git checkout test
           git pull
           git merge --no-ff origin/dev -m "Auto-merge dev back to master"
