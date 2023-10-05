@@ -12,9 +12,9 @@ jobs:
     - uses: actions/checkout@v3
     - name: Set Git config
       run: |
-         git config --local user.email "sandeep.bikkina@ah.nl"
-         git config --local user.name "Sandeep084b"
-    - name: Merge master back to dev
+         git config --local user.email "githubactions@noreply.com"
+         git config --local user.name "githusuer"
+    - name: Merge dev back to test
       run: |
           git fetch --unshallow
           git checkout test
