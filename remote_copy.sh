@@ -10,7 +10,7 @@ for filename in "${filenames[@]}"; do
     folder_name="$(dirname "$filename")"
     echo "$folder_name"
 	#Ignore .github, Readme files
-	if [ ["$folder_name" -ne ".github"] || ["$folder_name" -ne "."] ]; then
+	if [ ["$folder_name" =~ ".github"] || ["$folder_name" =~ "."] ]; then
 		# Extract base folder name
 	   base_dir="("$folder_name"  | cut -d "/" -f1)"
 	   # Copy values to an array
