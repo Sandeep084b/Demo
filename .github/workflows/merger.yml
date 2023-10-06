@@ -18,8 +18,8 @@ jobs:
     - name: List all added files
       run: |
         for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-          dir=$(dirname "$file"); do
-          echo "$file was added"; do
+          dir=$(dirname "$file");
+          echo "$file was added";
           echo "Directory: $dir"
         done
     - name: Set Git config
