@@ -16,19 +16,7 @@ jobs:
         
     - name: List all added files
       run: |
-        IFS=',' read -ra filenames <<< "${{ steps.changed-files.outputs.all_changed_files }}"
-        declare -A unique_folders
-        for filename in "${filenames[@]}"; do
-            folder_name="$(dirname "$filename")"
-            if [ ["$folder_name" -ne ".github"] || ["$folder_name" -ne "."] ]; then
-                base_dir="("$folder_name"  | cut -d "/" -f1)"
-                unique_folders["$base_dir"]=1
-            fi
-        done
-        unique_array=("${!unique_folders[@]}")
-        for values in "${!unique_array[@]}"; do
-            echo "$value"
-        done
+        ./remote_copy.sh
         for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
           dir=$(dirname "$file"); 
           echo "$file was added"; 
