@@ -21,8 +21,11 @@ jobs:
           dir=$(dirname "$file"); 
           echo "$file was added"; 
           echo "Directory: $dir";
-          BASE_DIRECTORY=$(echo "$dir" | cut -d "/" -f1);
+          BASE_DIRECTORY=$(echo "$dir" | cut -d "/" -f2);
           echo "$BASE_DIRECTORY";
+          output=output_file.txt
+          ls > $output
+          echo "gedit output_file.txt"
         done
     - name: Set Git config
       run: |
