@@ -17,13 +17,10 @@ jobs:
         
     - name: List all added files
       run: |
+        output_file="output.txt"
         for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-          dir=$(dirname "$file"); 
-          echo "$file was added"; 
-          echo "Directory: $dir";
-          BASE_DIRECTORY=$(echo "$dir" | cut -d "/" -f1);
-          echo "$BASE_DIRECTORY";
-         done
+        echo "$file" >> "$output_file"          
+        done
     - name: Set Git config
       run: |
          git config --local user.email "githubactions@noreply.com"
