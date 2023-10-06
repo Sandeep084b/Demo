@@ -4,20 +4,21 @@ IFS=',' read -ra filenames <<< "${GITHUB_OUTPUT}"
 #Create an array
 declare -A unique_folders
 
+exclude1=".github"
+exclude2="."
+
 #Loop in through filenames and extract unique folders
 for filename in "${filenames[@]}"; do
 	#Extract folder path
     folder_name="$(dirname "$filename")"
-    echo "$folder_name"
+    #echo "$folder_name"
+	base_dir=$(echo "$folder_name"  | awk -F'/' '{print $1}')
 	#Ignore .github, Readme files
-	if [ ["$folder_name" = ".github"] || ["$folder_name" = "."] ]; then
+	if [[ "$base_dir" == "$exclude1" ]] || [[ "$base_dir" = "$exclude2" ]]; then
 		continue
 	else
-		# Extract base folder name
-	   base_dir="("$folder_name"  | cut -d "/" -f1)"
-	   # Copy values to an array
-	   unique_folders["$base_dir"]=1
-	   
+		# Copy values to an array
+	   unique_folders["$base_dir"]=1	   
 	fi	 
 done
 
