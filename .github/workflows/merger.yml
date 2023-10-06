@@ -27,6 +27,7 @@ jobs:
          git config --local user.name "githusuer"
     - name: Merge dev back to test
       run: |
+          git commit -m "commit changs to output.txt"
           git fetch
           git checkout test
           git pull
