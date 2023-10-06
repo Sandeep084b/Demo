@@ -8,6 +8,7 @@ declare -A unique_folders
 for filename in "${filenames[@]}"; do
 	#Extract folder path
     folder_name="$(dirname "$filename")"
+    echo "$folder_name"
 	#Ignore .github, Readme files
 	if [ ["$folder_name" -ne ".github"] || ["$folder_name" -ne "."] ]; then
 		# Extract base folder name
