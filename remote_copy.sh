@@ -18,7 +18,7 @@ for filename in "${filenames[@]}"; do
 		continue
 	else
 		# Copy values to an array
-	   unique_folders["$base_dir"]=0	   
+	   unique_folders["$base_dir"]=1	   
 	fi	 
 done
 
