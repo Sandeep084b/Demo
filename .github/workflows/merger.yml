@@ -23,10 +23,7 @@ jobs:
           echo "Directory: $dir";
           BASE_DIRECTORY=$(echo "$dir" | cut -d "/" -f2);
           echo "$BASE_DIRECTORY";
-          output=output_file.txt
-          ls > $output
-          echo "gedit output_file.txt"
-        done
+         done
     - name: Set Git config
       run: |
          git config --local user.email "githubactions@noreply.com"
