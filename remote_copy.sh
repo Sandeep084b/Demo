@@ -1,5 +1,5 @@
 # split string by comma delimter
-IFS=',' read -ra filenames <<< "${{ steps.changed-files.outputs.all_changed_files }}"
+IFS=',' read -ra filenames <<< "${{ steps.file.outputs.modified }}"
 
 #Create an array
 declare -A unique_folders
