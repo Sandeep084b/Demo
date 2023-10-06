@@ -1,4 +1,3 @@
-# Merge dev branch to test
 name: Sync Branches
 on: 
   push:
@@ -10,14 +9,29 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+    - name: Get changed files
+      id: changed-files
+      uses: tj-actions/changed-files@v34
+      with:
+        separator: ","
+        
+    - name: List all added files
+      run: |
+        for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+          dir=$(dirname "$file"); 
+          echo "$file was added"; 
+          echo "Directory: $dir";
+          BASE_DIRECTORY=$(echo "$dir" | cut -d "/" -f2);
+          echo "$BASE_DIRECTORY";
+        done
     - name: Set Git config
       run: |
          git config --local user.email "githubactions@noreply.com"
          git config --local user.name "githusuer"
     - name: Merge dev back to test
       run: |
-          git fetch --unshallow
+          git fetch
           git checkout test
           git pull
-          git merge --no-ff origin/dev -m "Auto-merge dev back to test"
+          git merge --no-ff origin/dev -m "Auto-merge dev back to master"
           git push
