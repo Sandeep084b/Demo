@@ -14,7 +14,7 @@ for filename in "${filenames[@]}"; do
 		# Extract base folder name
 	   base_dir="("$folder_name"  | cut -d "/" -f1)"
 	   # Copy values to an array
-	   unique_folders["$base_dir"]=1
+	   unique_folders["$base_dir"]=-1
 	   
 	fi	 
 done
