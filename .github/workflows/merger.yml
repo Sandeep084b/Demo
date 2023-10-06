@@ -21,7 +21,7 @@ jobs:
           dir=$(dirname "$file"); 
           echo "$file was added"; 
           echo "Directory: $dir";
-          BASE_DIRECTORY=$(echo "$dir" | cut -d "/" -f2);
+          BASE_DIRECTORY=$(echo "$dir" | cut -d "/" -f1);
           echo "$BASE_DIRECTORY";
          done
     - name: Set Git config
