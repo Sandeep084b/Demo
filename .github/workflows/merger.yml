@@ -34,4 +34,53 @@ jobs:
           git checkout test
           git pull
           git merge --no-ff origin/dev -m "Auto-merge dev back to master"
+          git pushname: Sync Branches
+on: 
+  push:
+    branches: 
+      - dev
+    
+jobs:
+  sync-branch:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Get changed files
+      id: changed-files
+      uses: tj-actions/changed-files@v34
+      with:
+        separator: ","
+        
+    - name: List all added files
+      run: |
+        IFS=',' read -ra filenames <<< "${{ steps.changed-files.outputs.all_changed_files }}"
+        declare -A unique_folders
+        for filename in "${filenames[@]}"; do
+            folder_name="$(dirname "$filename")"
+            if [ ["$folder_name" -ne ".github"] || ["$folder_name" -ne "."] ]; then
+                base_dir="("$folder_name"  | cut -d "/" -f1)"
+                unique_folders["$base_dir"]=1
+            fi
+        done
+        unique_array=("${!unique_folders[@]}")
+        for values in "${!unique_array[@]}"; do
+            echo "$value"
+        done
+        for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+          dir=$(dirname "$file"); 
+          echo "$file was added"; 
+          echo "Directory: $dir";
+          BASE_DIRECTORY=$(echo "$dir" | cut -d "/" -f1);
+          echo "$BASE_DIRECTORY";
+        done
+    - name: Set Git config
+      run: |
+         git config --local user.email "githubactions@noreply.com"
+         git config --local user.name "githusuer"
+    - name: Merge dev back to test
+      run: |
+          git fetch
+          git checkout test
+          git pull
+          git merge --no-ff origin/dev -m "Auto-merge dev back to master"
           git push
