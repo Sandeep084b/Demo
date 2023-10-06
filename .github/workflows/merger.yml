@@ -7,6 +7,8 @@ on:
 jobs:
   sync-branch:
     runs-on: ubuntu-latest
+    outputs:
+      output1: ${{ steps.file.outputs.modified }}
     steps:
     - uses: actions/checkout@v3
     - name: Get changed files
@@ -16,16 +18,17 @@ jobs:
         separator: ","
         
     - name: List all added files
-      run: |
-        chmod +x remote_copy.sh
-        ./remote_copy.sh
+      run: |        
         for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+          echo "modified = $file" >> $GITHUB_OUTPUT 
           dir=$(dirname "$file"); 
           echo "$file was added"; 
           echo "Directory: $dir";
           BASE_DIRECTORY=$(echo "$dir" | cut -d "/" -f1);
           echo "$BASE_DIRECTORY";
         done
+        chmod +x remote_copy.sh
+        ./remote_copy.sh
     - name: Set Git config
       run: |
          git config --local user.email "githubactions@noreply.com"
