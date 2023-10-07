@@ -1,5 +1,9 @@
+input_string="${{ steps.modified.outputs.value }}"
+
+echo "$input_string"
+
 # split string by comma delimter
-IFS=',' read -ra filenames <<< "${{ steps.modified.outputs.value }}"
+IFS=',' read -ra filenames <<< "$input_string"
 
 #Create an array
 declare -A unique_folders
