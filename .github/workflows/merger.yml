@@ -21,11 +21,11 @@ jobs:
       run: |        
         for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
           echo "modified = $file" >> $GITHUB_OUTPUT 
-          dir=$(dirname "$file"); 
-          echo "$file was added"; 
-          echo "Directory: $dir";
-          BASE_DIRECTORY=$(echo "$dir" | cut -d "/" -f1);
-          echo "$BASE_DIRECTORY";
+          #dir=$(dirname "$file"); 
+          #echo "$file was added"; 
+          #echo "Directory: $dir";
+          #BASE_DIRECTORY=$(echo "$dir" | cut -d "/" -f1);
+          #echo "$BASE_DIRECTORY";
         done
         chmod +x remote_copy.sh
         ./remote_copy.sh
