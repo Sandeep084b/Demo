@@ -30,14 +30,4 @@ jobs:
         done
         chmod +x remote_copy.sh
         ./remote_copy.sh
-    - name: Set Git config
-      run: |
-         git config --local user.email "githubactions@noreply.com"
-         git config --local user.name "githusuer"
-    - name: Merge dev back to test
-      run: |
-          git fetch
-          git checkout test
-          git pull
-          git merge --no-ff origin/dev -m "Auto-merge dev back to master"
-          git push
+    
