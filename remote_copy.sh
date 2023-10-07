@@ -1,4 +1,4 @@
-input_string="${{ steps.modified.outputs.value }}"
+input_string="$modifiedfiles"
 
 echo "$input_string"
 
