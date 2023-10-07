@@ -18,7 +18,7 @@ exclude2="."
 
 # Iterate through the values to copy unique one into the array
 for filename in "${filenames[@]}"; do
-	folder_name="(dirname "$filename")"
+	folder_name="$(dirname "$filename")"
 	base_dir=$(echo "$folder_name" | awk -F'/' '{print $1}')
 	if [[ "$base_dir" == "$exclude1" ]] || [[ "$base_dir" == "exclude2" ]]; then
 		continue
