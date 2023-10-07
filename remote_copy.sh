@@ -1,46 +1,40 @@
+#!/bin/bash
+
+#get modified files info as string
 input_string="$modifiedfiles"
 
-echo "$input_string"
+#Define the delimiter
+delimiter=","
 
-# split string by comma delimter
-IFS=',' read -ra filenames <<< "$input_string"
+# Splitthe input string into an using the delimiter
+IFS="$delimiter" read -ra filenames <<< "$input_string"
 
-#Create an array
-declare -A unique_folders
+# Create an associative array to store unique values
+declare -A unique_values
 
+# Ignore .github and root folders
 exclude1=".github"
 exclude2="."
 
-#Loop in through filenames and extract unique folders
+# Iterate through the values to copy unique one into the array
 for filename in "${filenames[@]}"; do
-	#Extract folder path
-    folder_name="$(dirname "$filename")"
-    #echo "$folder_name"
-	base_dir=$(echo "$folder_name"  | awk -F'/' '{print $1}')
-	#Ignore .github, Readme files
-	if [[ "$base_dir" == "$exclude1" ]] || [[ "$base_dir" = "$exclude2" ]]; then
+	folder_name="(dirname "$filename")"
+	base_dir=$(echo "$folder_name" | awk -F'/' '{print $1}')
+	if [[ "$base_dir" == "$exclude1" ]] || [[ "$base_dir" == "exclude2" ]]; then
 		continue
 	else
-		# Copy values to an array
-	   unique_folders["$base_dir"]=1	   
-	fi	 
+		unique_values["$base_dir"]=1
+	fi
 done
 
-if [ "${#unique_folders[@]}" != 0 ]; then
-
-	#omit duplicates
-	unique_array=("${!unique_folders[@]}")
-
-	#remote_server="remote server address"
-	#remote_user="remote_username"
-	#remote_destination="remote_path"
-
-	for values in "${unique_array[@]}"; do
-		#Do a remot copy
-		#scp -r "values" "$remote_user@remote_server:$remote_destination"
+if [ "${#unique_values[@]}" != 0 ]; then
+	unique_array=("${!unique_values[@]}")
+	
+	for value in "${unique_array[@]}"; do
 		echo "$value"
 	done
 else
 	echo "No Deployment Needed"
 fi
 
+	
