@@ -1,5 +1,5 @@
 # split string by comma delimter
-IFS=',' read -ra filenames <<< "${{needs.sync-branch.outputs.modified}}"
+IFS=',' read -ra filenames <<< "$GITHUB_OUTPUT"
 
 #Create an array
 declare -A unique_folders
