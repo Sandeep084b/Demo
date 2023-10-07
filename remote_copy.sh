@@ -35,7 +35,7 @@ if [ "${#unique_folders[@]}" != 0 ]; then
 	#remote_user="remote_username"
 	#remote_destination="remote_path"
 
-	for values in "${!unique_array[@]}"; do
+	for values in "${unique_array[@]}"; do
 		#Do a remot copy
 		#scp -r "values" "$remote_user@remote_server:$remote_destination"
 		echo "$value"
