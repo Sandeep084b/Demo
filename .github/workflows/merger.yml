@@ -7,8 +7,6 @@ on:
 jobs:
   sync-branch:
     runs-on: ubuntu-latest
-    outputs:
-      output1: ${{ steps.modified.outputs.value }}
     steps:
     - uses: actions/checkout@v3
     - name: Get changed files
@@ -21,7 +19,7 @@ jobs:
       id: modified
       run: |        
         for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-          echo "value = $file" >> $GITHUB_OUTPUT 
+          echo "modifiedfiles=$file" >> $GITHUB_ENV 
           #dir=$(dirname "$file"); 
           #echo "$file was added"; 
           #echo "Directory: $dir";
