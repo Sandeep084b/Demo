@@ -18,19 +18,25 @@ for filename in "${filenames[@]}"; do
 		continue
 	else
 		# Copy values to an array
-	   unique_folders["$base_dir"]=-1	   
+	   unique_folders["$base_dir"]=1	   
 	fi	 
 done
 
-#omit duplicates
-unique_array=("${!unique_folders[@]}")
+if [ "${#unique_folders[@]}" != 0 ]; then
 
-#remote_server="remote server address"
-#remote_user="remote_username"
-#remote_destination="remote_path"
+	#omit duplicates
+	unique_array=("${!unique_folders[@]}")
 
-for values in "${!unique_array[@]}"; do
-	#Do a remot copy
-    #scp -r "values" "$remote_user@remote_server:$remote_destination"
-    echo "$value"
-done
+	#remote_server="remote server address"
+	#remote_user="remote_username"
+	#remote_destination="remote_path"
+
+	for values in "${!unique_array[@]}"; do
+		#Do a remot copy
+		#scp -r "values" "$remote_user@remote_server:$remote_destination"
+		echo "$value"
+	done
+else
+	echo "No Deployment Needed"
+fi
+
