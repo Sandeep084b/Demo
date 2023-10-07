@@ -26,5 +26,8 @@ jobs:
           #BASE_DIRECTORY=$(echo "$dir" | cut -d "/" -f1);
           #echo "$BASE_DIRECTORY";
         done
+    - name: Execute Shell Script
+      run: |
+        echo "$modifiedfiles"
         chmod +x remote_copy.sh
         ./remote_copy.sh
