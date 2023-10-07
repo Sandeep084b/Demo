@@ -1,5 +1,5 @@
 # split string by comma delimter
-IFS=',' read -ra filenames <<< "$GITHUB_OUTPUT"
+IFS=',' read -ra filenames <<< "${{ steps.modified.outputs.value }}"
 
 #Create an array
 declare -A unique_folders
