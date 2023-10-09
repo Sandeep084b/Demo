@@ -1,11 +1,11 @@
-# sync branches
+# Deploy Packages to test sevrer 
 on: 
   push:
     branches: 
       - dev
     
 jobs:
-  sync-branch:
+  deploy:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -17,15 +17,10 @@ jobs:
         
     - name: List all added files
       id: modified
-      run: |        
-        for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-          echo "modifiedfiles=$file" >> $GITHUB_ENV 
-          #dir=$(dirname "$file"); 
-          #echo "$file was added"; 
-          #echo "Directory: $dir";
-          #BASE_DIRECTORY=$(echo "$dir" | cut -d "/" -f1);
-          #echo "$BASE_DIRECTORY";
-        done
+      run: | 
+        echo "modifiedfiles=${{ steps.changed-files.outputs.all_changed_files }}" >> $GITHUB_ENV
+        echo "$modifiedfiles"
+        
     - name: Execute Shell Script
       run: |
         echo "$modifiedfiles"
