@@ -1,11 +1,11 @@
-name: Sync Branches
+# Deploy Packages to test sevrer 
 on: 
   push:
     branches: 
       - dev
     
 jobs:
-  sync-branch:
+  deploy:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -16,22 +16,13 @@ jobs:
         separator: ","
         
     - name: List all added files
+      id: modified
+      run: | 
+        echo "modifiedfiles=${{ steps.changed-files.outputs.all_changed_files }}" >> $GITHUB_ENV
+        echo "$modifiedfiles"
+        
+    - name: Execute Shell Script
       run: |
-        for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-          dir=$(dirname "$file"); 
-          echo "$file was added"; 
-          echo "Directory: $dir";
-          BASE_DIRECTORY=$(echo "$dir" | cut -d "/" -f2);
-          echo "$BASE_DIRECTORY";
-        done
-    - name: Set Git config
-      run: |
-         git config --local user.email "githubactions@noreply.com"
-         git config --local user.name "githusuer"
-    - name: Merge dev back to test
-      run: |
-          git fetch
-          git checkout test
-          git pull
-          git merge --no-ff origin/dev -m "Auto-merge dev back to master"
-          git push
+        echo "$modifiedfiles"
+        chmod +x remote_copy.sh
+        ./remote_copy.sh
