@@ -43,7 +43,7 @@ if [ "${#unique_values[@]}" != 0 ]; then
 
 # Print the unique values (optional)
 	for value in "${unique_array[@]}"; do
- 		compressed_folder=echo(zip -r - "$value" > "$value.zip")
+ 		compressed_folder=$(echo zip -r - "$value" > "$value.zip")
 		echo "$value"
   		echo "$compressed_folder"
 		#scp -r compressed.zip "$remote_user@$remote_host:$remote_path"
