@@ -43,13 +43,15 @@ if [ "${#unique_values[@]}" != 0 ]; then
 
 # Print the unique values (optional)
 	for value in "${unique_array[@]}"; do
+		zip -r - "$value" > compressed.zip
 		echo "$value"
-		scp -r "$value/" "$remote_user@$remote_host:$remote_path"
+		scp -r compressed.zip "$remote_user@$remote_host:$remote_path"
 		if [ $? -eq 0 ]; then
 			echo "Deployment scuucessfull"
 		else
 			echo "Deployment umsuccessfull"
 		fi
+	
 	done
 else
 	echo "No deployment needed"
