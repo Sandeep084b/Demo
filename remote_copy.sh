@@ -29,6 +29,14 @@ for filename in "${filenames[@]}"; do
 	fi
 done
 
+remote_user="$$remoteUser"
+remote_host="$remoteHost"
+remote_path="$remotePATH"
+
+echo "$remote_user"
+echo "remote_host"
+echo "remote_path"
+
 # Convert the associative array keys (unique values) into a regular indexed array
 if [ "${#unique_values[@]}" != 0 ]; then
 	unique_array=("${!unique_values[@]}")
@@ -36,7 +44,7 @@ if [ "${#unique_values[@]}" != 0 ]; then
 # Print the unique values (optional)
 	for value in "${unique_array[@]}"; do
 		echo "$value"
-		scp -r "$value" "$remoteUser@$remoteHost:$remotePATH"
+		scp -r "$value" "$remote_user@$remote_host:$remote_path"
 		if [ $? -eq 0 ]; then
 			echo "Deployment scuucessfull"
 		else
