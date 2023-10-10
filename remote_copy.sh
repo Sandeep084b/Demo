@@ -44,7 +44,7 @@ if [ "${#unique_values[@]}" != 0 ]; then
 # Print the unique values (optional)
 	for value in "${unique_array[@]}"; do
 		echo "$value"
-		scp -r "$value/" "wmadmin@vmwebmtweeu01.retail.ah.eu-int-aholddelhaize.com:/integration/appl/tst/wmadmin/vendor/105/IS1/IntegrationServer/instances/default/replicate/inbound/"
+		scp -r "$value/" "wmadmin@is1001t-wm.retail.ah.eu-int-aholddelhaize.com:/integration/appl/tst/wmadmin/vendor/105/IS1/IntegrationServer/instances/default/replicate/inbound/"
 		if [ $? -eq 0 ]; then
 			echo "Deployment scuucessfull"
 		else
