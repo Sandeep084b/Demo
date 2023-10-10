@@ -14,7 +14,6 @@ declare -A unique_values
 
 exclude1=".github"
 exclude2="."
-exclude3="Scripts"
 
 # Iterate through the values to copy unique ones into the associative array
 for filename in "${filenames[@]}"; do
@@ -23,7 +22,7 @@ for filename in "${filenames[@]}"; do
     # Use the value as a key in the associative array to ensure uniqueness
 	base_dir=$(echo "$folder_name" | awk -F'/' '{print $1}')	
 	#echo "$base_dir"
-	if  [[ "$base_dir" == "$exclude1" ]] || [[ "$base_dir" == "$exclude2" ]] || [[ "$base_dir" == "$exclude3" ]]; then		
+	if  [[ "$base_dir" == "$exclude1" ]] || [[ "$base_dir" == "$exclude2" ]]; then		
 		continue
 	else
 		unique_values["$base_dir"]=0
@@ -36,8 +35,8 @@ if [ "${#unique_values[@]}" != 0 ]; then
 
 # Print the unique values (optional)
 	for value in "${unique_array[@]}"; do
-		scp -r "$value" "$remoteUser@remoteHost:$remotePATH"
 		echo "$value"
+		scp -r "$value" "$remoteUser@remoteHost:$remotePATH"
 		if [ $? -eq 0 ]; then
 			echo "Deployment scuucessfull"
 		else
