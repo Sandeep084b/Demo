@@ -24,6 +24,7 @@ jobs:
       run: | 
         echo "modifiedfiles=${{ steps.changed-files.outputs.all_changed_files }}" >> $GITHUB_ENV
         #echo "modifiedfiles"
+        echo "$remoteUser"
         
     - name: Execute Shell Script
       run: |
