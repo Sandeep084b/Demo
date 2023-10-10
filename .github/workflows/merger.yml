@@ -10,23 +10,23 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Get changed files
-      env:
-        remoteUser: ${{ secrets.REMOTE_USER }}
-        remoteHost: ${{ secrets.REMOTE_PASSWORD }}
-        remotePATH: ${{ secrets.REMOTE_PATH }}
       id: changed-files
       uses: tj-actions/changed-files@v34
       with:
         separator: ","
         
     - name: List all added files
-      id: modified
+      id: modified      
       run: | 
         echo "modifiedfiles=${{ steps.changed-files.outputs.all_changed_files }}" >> $GITHUB_ENV
         #echo "modifiedfiles"
         echo "${{ secrets.REMOTE_USER }}"
         
     - name: Execute Shell Script
+      env:
+        remoteUser: ${{ secrets.REMOTE_USER }}
+        remoteHost: ${{ secrets.REMOTE_SERVER }}
+        remotePATH: ${{ secrets.REMOTE_PATH }}
       run: |
         echo "$modifiedfiles"
         chmod +x ./remote_copy.sh
