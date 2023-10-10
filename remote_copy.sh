@@ -36,7 +36,7 @@ if [ "${#unique_values[@]}" != 0 ]; then
 # Print the unique values (optional)
 	for value in "${unique_array[@]}"; do
 		echo "$value"
-		scp -r "$value" "$remoteUser@remoteHost:$remotePATH"
+		scp -r "$value" "$remoteUser@$remoteHost:$remotePATH"
 		if [ $? -eq 0 ]; then
 			echo "Deployment scuucessfull"
 		else
