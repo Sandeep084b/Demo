@@ -29,9 +29,9 @@ for filename in "${filenames[@]}"; do
 	fi
 done
 
-remote_user="$$remoteUser"
-remote_host="$remoteHost"
-remote_path="$remotePATH"
+remote_user="${{ secrets.REMOTE_USER }}"
+remote_host="${{ secrets.REMOTE_SERVER }}"
+remote_path="${{ secrets.REMOTE_PATH }}"
 
 echo "$remote_user"
 echo "remote_host"
