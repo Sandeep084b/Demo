@@ -29,13 +29,13 @@ for filename in "${filenames[@]}"; do
 	fi
 done
 
-remote_user="${{ secrets.REMOTE_USER }}"
-remote_host="${{ secrets.REMOTE_SERVER }}"
-remote_path="${{ secrets.REMOTE_PATH }}"
+remote_user="$remoteUser"
+remote_host="$remoteHost"
+remote_path="$remotePATH"
 
 echo "$remote_user"
-echo "remote_host"
-echo "remote_path"
+echo "$remote_host"
+echo "$remote_path"
 
 # Convert the associative array keys (unique values) into a regular indexed array
 if [ "${#unique_values[@]}" != 0 ]; then
